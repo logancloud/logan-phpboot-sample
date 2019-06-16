@@ -13,7 +13,6 @@ before_install:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 
 script:
-  - mvn clean package
   - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
     docker build . -t logancloud/logan-phpboot-sample:latest;
     docker push logancloud/logan-phpboot-sample:latest;
