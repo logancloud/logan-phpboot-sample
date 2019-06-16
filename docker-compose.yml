@@ -1,0 +1,9 @@
+version: '3'
+services:
+  logan-phpboot-sample:
+    stdin_open: true
+    restart: unless-stopped
+    image: logancloud/logan-phpboot-sample:latest
+    ports:
+      - "9999:7777"
+      - "443:8000"

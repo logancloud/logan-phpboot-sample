@@ -1,0 +1,24 @@
+sudo: required
+
+language: php
+
+os:
+  - linux
+
+services:
+  - docker
+
+
+before_install:
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+
+script:
+  - mvn clean package
+  - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
+    docker build . -t logancloud/logan-phpboot-sample:latest;
+    docker push logancloud/logan-phpboot-sample:latest;
+    fi
+  - ./scripts/travis-push-docker-image.sh
+
+after_script:
+  -   docker logout
